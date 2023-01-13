@@ -78,7 +78,7 @@ jobs:
           
       - uses: Difegue/action-megacmd@master
         with:
-          args: put -c build/${{ matrix.targetPlatform }} /Unity_projects/URP_2022.2.2/1/
+          args: put -c build/${{ matrix.targetPlatform }} /Unity_projects/URP_2022.2.2/2/
         env:
           USERNAME: ${{ secrets.MEGA_USERNAME }}
           PASSWORD: ${{ secrets.MEGA_PASSWORD }}
