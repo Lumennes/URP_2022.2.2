@@ -79,6 +79,8 @@ namespace UnityTemplateProjects
         [Tooltip("Whether or not to invert our Y axis for mouse input to rotation.")]
         public bool invertY = false;
 
+        UnityEngine.Rendering.Universal.UniversalAdditionalCameraData uac;
+
 #if ENABLE_INPUT_SYSTEM
         InputAction movementAction;
         InputAction verticalMovementAction;
@@ -126,6 +128,9 @@ namespace UnityTemplateProjects
         {
             m_TargetCameraState.SetFromTransform(transform);
             m_InterpolatingCameraState.SetFromTransform(transform);
+
+            uac =
+                GetComponent<Camera>().GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>();
         }
 
         Vector3 GetInputTranslationDirection()
@@ -165,8 +170,20 @@ namespace UnityTemplateProjects
             return direction;
         }
 
+        
+
         void Update()
         {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+                QualitySettings.SetQualityLevel(0);
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+                QualitySettings.SetQualityLevel(1);
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+                QualitySettings.SetQualityLevel(2);
+
+            if(Input.GetKeyDown(KeyCode.P))
+                uac.renderPostProcessing = !uac.renderPostProcessing;
+
             // Exit Sample
 
             if (IsEscapePressed())

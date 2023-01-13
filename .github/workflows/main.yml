@@ -16,6 +16,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        projectName:
+          - URP_2022
         #cloudRunnerCluster:
           # - local-docker
         #  - local
@@ -50,10 +52,10 @@ jobs:
       ###########################
       - uses: actions/cache@v2
         with:
-          path: ${{ matrix.projectPath }}/Library
-          key: Library-${{ matrix.projectPath }}-ubuntu-${{ matrix.targetPlatform }}
+          path: ${{ matrix.projectName }}/Library
+          key: Library-${{ matrix.projectName }}-ubuntu-${{ matrix.targetPlatform }}
           restore-keys: |
-            Library-${{ matrix.projectPath }}-ubuntu-
+            Library-${{ matrix.projectName }}-ubuntu-
             Library-
 
       ###########################
@@ -78,7 +80,7 @@ jobs:
           
       - uses: Difegue/action-megacmd@master
         with:
-          args: put -c build/${{ matrix.targetPlatform }} /Unity_projects/URP_2022.2.2/2/
+          args: put -c build/${{ matrix.targetPlatform }} /Unity_projects/${{ matrix.projectName }}/${{ matrix.projectName }}_3/
         env:
           USERNAME: ${{ secrets.MEGA_USERNAME }}
           PASSWORD: ${{ secrets.MEGA_PASSWORD }}
